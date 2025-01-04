@@ -6,10 +6,10 @@ You need
 |     | A   |
 | --- | --- |
 | B   | C   |
-![[pics/Pasted image 20241228111726.png]]
+![[pics/dd.png]]
 $O(n^3)$
 ### Describe a way to reduce $𝑛 × 𝑛$  matrix multiplication recursively to 8 multiplications of $𝑛/2 × 𝑛/2$ matrices.
-![[pics/Pasted image 20241228113017.png]]
+![[pics/ddd.png]]
 ![[pics/IMG_2702.jpeg|500]]
 red dot involves multiplying matrixes of size n/2
 We branch out 8 times, ie red dots
@@ -40,7 +40,7 @@ somebody is out on the digits $2 \leq 2.3715 \leq 2.3728$
 ### How can matrix multiplication be used for detecting and counting triangles? 
 We start by representing the graph trough an adjencency matrix.
 When we times the matrix with it self, $A^2$
-	![[pics/Pasted image 20241228181800.png]]
+	![[pics/ggfbg.png]]
 	We get a contribution of one for each index $k$ where there is an edge $ik$ as well as an edge $kj$—in other words, the $(i, j)$th entry of $A^2$ counts the number of two-hop paths from $i$ to $j$
 	The diagonal entries $A^3[i][i]$ give three times the number of triangles involving vertex iii, as each triangle is counted once for each of its vertices.
 	And twice for going around one way or the other
@@ -59,7 +59,7 @@ A clique of size $k$ is a set of  $k$ vertices that are pairwise connected. Dete
 **Verification**:
     - After identifying candidate sets of vertices from $A^{k-1}$ , verify that all pairs within each set are connected by checking the corresponding entries in the original adjacency matrix A.
 
-![[pics/Pasted image 20241228194430.png]]
+![[pics/vfsvs.png]]
 *from chat*
 ### Can you use the clique algorithm to find/count independent sets
 The independent set is the opposite problem of the clique. 

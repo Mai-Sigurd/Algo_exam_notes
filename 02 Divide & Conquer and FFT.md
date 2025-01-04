@@ -15,10 +15,10 @@ Karatsuba's algorithm is a divide-and-conquer method for multiplying two integer
 It reduces the number of multiplications required, which is the most computationally expensive operation in integer multiplication.
 
 The trick is to get to down to **three** recursive calls, as if we do four,  it will lead to $n^2$
-![[Pasted image 20241227231801.png]]
+![[pics/kf.png]]
 
-![[Pasted image 20241227225320.png]]
-![[pics/Pasted image 20241227233329.png]]
+![[pics/pd.png]]
+![[pics/lsl.png]]
 
 ![[pics/IMG_2701.jpeg]]
 
@@ -27,5 +27,5 @@ The trick is to get to down to **three** recursive calls, as if we do four,  it 
 From master thm
 ![[pics/IMG_2700 1.jpeg|500]]
 3 way branching, split factor of 2, because we halve the number of bits each time we branch
-![[pics/Pasted image 20241227225223.png]]
-![[pics/Pasted image 20241227225207.png]]
+![[pics/ps.png]]
+![[pics/ls.png]]

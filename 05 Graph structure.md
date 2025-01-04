@@ -25,12 +25,12 @@ Inteval graphs have a PEO, but some non interval graphs also have a peo.
 
 
 ##### non interval with peo
-![[pics/Pasted image 20241226111541.png]]
+![[pics/1.png]]
 ##### continue
 **Observation 1** : With the peo defined we can make the observation that, the cycle graph $CI$ for i larger than 4, does not a peo, because CI does not have any simplicial vertcies
 **Observation2**: If a graph has Ci as an induced subgraph, then it does not have a peo. 
 proof with Íwith drawing
-![[pics/Pasted image 20241226120534.png]]
+![[pics/2.png]]
 #### 
 
 #### Chordal graph <= peo
@@ -46,7 +46,7 @@ In oberservation 2 we show that if G is not chordal then it does not have a peo.
 - If G is not a complete graph. Then G has two non-adjacent simplicial vertices. We need:
 	- A seperator in Graph G is a set $S \subseteq V(G)$ such that $G-S$ is disconnedted
 	- A seperator is minimal if  no subset of S has the same property
-	- ![[pics/Pasted image 20241226124415.png]]
+	- ![[pics/3.png]]
 **Proof** for the **lemma**
 > [!Lemma]
 > If G is chordal then any minimal seperator is a clique. 
@@ -55,7 +55,7 @@ Let S be a minimal separator of G and suppose by a contradiction that S is not a
 By the minimality of S there exists two connected components $A,B$ of $G-S$ s.t every vertex of S has a neighbor in A and a neighbor in B 
 S is a seperator => there are no edges between A and B
 	Since A is a connected component and both u and v have a neighbor in A, $A \cup {u,v}$ is also connected 
-	![[pics/Pasted image 20241226134717.png]]
+	![[pics/4.png]]
 	- Let $P_a$ be the shortest path between u and v in $G[{A\cup \{u,v\}}]$.
 	- Let $P_b$ be a shortest u,v path defined anlogously in $G[{B\cup \{u,v\}}]$
 	- Then since P_A has atleast one vertex in A and PB has at least one vertex in B then we conclude G has an induced cycle on at least 4 vertices. 
@@ -72,7 +72,7 @@ If G is not complete, G has at least three vertices. If G is a 3 vertices line (
 	- Then $\exists x,y \in V(G)$ s.t $xy \notin E(G)$ 
 - Let S be a minimal separator that separates x and y
 - let A_x be the connected component of G-s that contains X and let A_y be defined accordingly. 
-- ![[pics/Pasted image 20241226143953.png]]
+- ![[pics/oq.png]]
 	- Note that $G[A_{x}\cup S]$ is chordal . If $G[A_{x}\cup S]$ is complete, then A_x contain a simplicial vertex which is also a simplicial vertex in G. By induction hypothesis, $G[A_{x}\cup S]$ has two non-adjacent simplicial vertices. 
 - note that a vertex that is simplicial in $G[A_{x}\cup S]$ but is contained in S is *not* necesarily simplicial in G, as  this vertex has neighboors in A_y .
   However since $G[A_{x}\cup S]$ has two non-adjacent simplicial vertices and by Obs2 S is a clique we know that at least one of the simplical vertices is in Ax, (and not in S) . Hence this vertex is also a simplicial in G. (Note that is has the same set of neighbors in $G[A_{x}\cup S]$ and in $G$
@@ -85,7 +85,7 @@ something something PEO?
 ### What is a clique tree for a chordal graph? Show how to construct a clique tree for a chordal graph in polynomial time.
 A clique tree for a chordal graphs shows us the maximal sizes of the cliques, and the denotes for us some seperators.
 We can construct these in polynomial time. 
-![[pics/Pasted image 20241226153129.png]]
+![[pics/pq.png]]
 
 # Solving problems on chordal graphs 
 ###  Describe how to solve the Maximum Independent Set problem on trees. How can you solve it on forests?
