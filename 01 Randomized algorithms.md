@@ -1,5 +1,5 @@
 monomials  is **an expression that has a single term, with variables and a coefficient**. For example, 2xy is a monomial since it is a single term, has two variables, and one coefficient. 2xy+10 is a binomial
-![[Pasted image 20241230121816.png]]
+![[pics/Pasted image 20241230121816.png]]
 ## Polynomial identity testing 
 ### What is the polynomial identity testing problem? 
 A degree d polynomial has at most d roots
@@ -7,7 +7,7 @@ A degree d polynomial has at most d roots
 The **polynomial identity testing (PIT)** problem asks whether a given polynomial $p(x_1, x_2, \dots, x_n)$ is identically zero. That is, it checks if $p \equiv 0$ across all possible input values.
 
  Identity testing is the problem of determining whether a given multivariate [polynomial](https://en.wikipedia.org/wiki/Polynomial "Polynomial") is the 0-polynomial
- ![[Pasted image 20241230132435.png]]
+ ![[pics/Pasted image 20241230132435.png]]
 ### Why can it be reduced to deciding whether a given polynomial is the zero polynomial? 
 A polynomial is zero if and only if all its coefficients are zero. Testing whether $p(x) = 0$ for all $x$ reduces to verifying if p evaluates to zero for sufficiently many points. If p evaluates to nonzero at any point, it is not identically zero.
 
@@ -59,20 +59,20 @@ When doing matrix products it takes $n^3$ or theoritacally $n^{2.373}$
 - Trades perfect accuracy for speed
 - Only needs to perform matrix-vector multiplications
 
-![[Pasted image 20241230142333.png]]
+![[pics/Pasted image 20241230142333.png]]
 #### Describe the random choices made by the algorithm. 
 #### Depending on the random choices, when does the algorithm succeed and when does it fail? 
-![[Pasted image 20241230142436.png]]
+![[pics/Pasted image 20241230142436.png]]
 #### What is the failure probability of the algorithm? Use probability theory to give an argument for your answer
-![[Pasted image 20241230142456.png]]
-![[Pasted image 20241230142525.png]]
+![[pics/Pasted image 20241230142456.png]]
+![[pics/Pasted image 20241230142525.png]]
 ## Karger’s algorithm: 
 ### What is a global min-cut in a graph? 
 Given a connected undirected graph, a minimum cut or mincut is a smallest subset of edges that disconnects the graph in two connected components
-![[Pasted image 20241231115436.png|500]]
+![[pics/Pasted image 20241231115436.png|500]]
 ### Describe Karger’s algorithm to find a global min-cut in a graph. 
 **Edge contraction**
-Given a multigraph (a graph that may have multiple edges between any two vertices), an edge contraction of the edge $e=(u,v)$ collapses u and v into one new vertex $w$, removes all edges between $u$ and $v$, but retain all other edges.![[Pasted image 20241231115654.png|500]]
+Given a multigraph (a graph that may have multiple edges between any two vertices), an edge contraction of the edge $e=(u,v)$ collapses u and v into one new vertex $w$, removes all edges between $u$ and $v$, but retain all other edges.![[pics/Pasted image 20241231115654.png|500]]
 **Karger’s original algorithm**
 - Repeat n-2 times: 
 	- Uniformly and independently sample an edge in the (multi)graph and contract it. 
@@ -80,7 +80,7 @@ Given a multigraph (a graph that may have multiple edges between any two vertice
   Output the edges between them as the min-cut.
 *Key property: we will never make a graph cut smaller. Some cuts vanish, but any cut in a resulting graph is also a cut in the original graph.*
 
-![[Pasted image 20241231115807.png|400]]![[Pasted image 20241231115822.png|400]]
+![[pics/Pasted image 20241231115807.png|400]]![[pics/Pasted image 20241231115822.png|400]]
 ### What is the failure probability of Karger’s algorithm? Sketch an analysis using probability theory and highlight where exactly properties of an assumed min-cut are used in the analysis. 
 Let $G=(V,E)$ let $n=|V|$
 Pick some mincut C from G with Size K
@@ -103,11 +103,11 @@ $$P\neg (A_{i})=(1-P(A_{i}))=(1-\frac{2}{n_i})$$
 The chance of going all n-2 contractions without contracting an edge in C
 $$\prod_{i=0}^{n-3}P(\neg A_{i})=(1-\frac{2}{n_i})$$
 
-but what is $n_i$![[Pasted image 20241231142423.png|300]]
-![[Pasted image 20241231142456.png]]
+but what is $n_i$![[pics/Pasted image 20241231142423.png|300]]
+![[pics/Pasted image 20241231142456.png]]
 $$\frac{(n-2)!\cdot 2}{n!}$$
 
-![[Pasted image 20241231142849.png]]
+![[pics/Pasted image 20241231142849.png]]
 
 On a graph with n vertices a single run of kargers algorithm will give the actual min-cut with $\binom{n}{2}^{-1}$
 
@@ -128,7 +128,7 @@ P(\text{fail})
 $$
 If we set $k=n^2$
 $P(\text{fail})\leq (e^{\frac{1}{n^{2}}})^{n^2}=e^{\frac{n^{2}}{n^{2}}}=e^{-1}=\frac{1}{e}$
-![[Pasted image 20250102113625.png]]
+![[pics/Pasted image 20250102113625.png]]
 ### Why does the success probability analysis of Karger’s algorithm imply that any graph has at most $\binom{n}{2}$ global min-cuts?
 
 
@@ -147,7 +147,7 @@ $P(\text{fail})\leq (e^{\frac{1}{n^{2}}})^{n^2}=e^{\frac{n^{2}}{n^{2}}}=e^{-1}=\
 ## The Monte Carlo method: 
 
 ### Sketch how you can determine the number $π$ by throwing darts. 
-![[Pasted image 20250104105952.png]]
+![[pics/Pasted image 20250104105952.png]]
 ### What does it mean for a randomised algorithm to $(ε,δ)$-approximate a value? 
 ### How many samples are sufficient to $(ε,δ)$-approximate the mean $μ$ of an indicator random variable $X$? What is the name of the bound used to prove this? (You don’t need to prove this bound, but have a rough idea how the proof works.) 
 Chern off bound
@@ -161,7 +161,7 @@ Chern off bound
 #### How does this algorithm solve the problem encountered by the algorithm in the previous bullet point?
 
 ## Primality testing -
-![[Pasted image 20250103112219.png]]
+![[pics/Pasted image 20250103112219.png]]
 ### What is a strong probable prime?
 A strong probable prime (also called a strong pseudoprime) is a number that passes a **strengthened version of the Fermat primality test**. Let's understand what this means step by step.
 
@@ -170,24 +170,24 @@ First, recall *Fermat's Little Theorem*: if $p$ is prime and $a$ is not divisibl
 
 
 
-![[Pasted image 20250103112149.png]]
+![[pics/Pasted image 20250103112149.png]]
 
 ### What is the repeated squaring algorithm? What is its running time? 
 The algo makes use of:
 	$a \cdot b \bmod m = (a \bmod m) \cdot (b \bmod m) \mod m$
 and the fact that you can split exponents up, and delete some of them when you take them to base 2
-![[Pasted image 20250104131330.png]]
+![[pics/Pasted image 20250104131330.png]]
 
 
 
 ### Describe one algorithm that efficiently checks whether an integer is a prime or not w.h.p.(with high probability)
 ==TODO ask chat to explain==
-![[Pasted image 20250104114505.png]]
+![[pics/Pasted image 20250104114505.png]]
 
 ## Algebraic algorithms:
 ### Roughly, what does the DeMillo-Lipton-Schwartz-Zippel lemma say 
 is a tool commonly used in probabilistic [polynomial identity testing](https://en.wikipedia.org/wiki/Polynomial_identity_testing "Polynomial identity testing"). Identity testing is the problem of determining whether a given multivariate [polynomial](https://en.wikipedia.org/wiki/Polynomial "Polynomial") is the 0-polynomial, the polynomial that ignores all its variables and always returns zero. The lemma states that evaluating a nonzero polynomial on inputs chosen randomly from a large-enough set is likely to find an input that produces a nonzero output.
-![[Pasted image 20250102144733.png]]
+![[pics/Pasted image 20250102144733.png]]
 
 Let's start with a single variable case:
 
@@ -228,15 +228,15 @@ A field is a set F and two operations addition + and multiplication * such that
 
 If everything above is fulfilled except the criteria that all non-zero elements have a multiplicative inverse, we instead get a (commutative) ring.
 
-![[Pasted image 20250102134839.png|300]]
+![[pics/Pasted image 20250102134839.png|300]]
 ### Name one combinatorial problem matrix determinants can be used to solve and describe roughly how it works. 
 **Perfect Matching in Bipartite Graphs**
-![[Pasted image 20250102153050.png]]
+![[pics/Pasted image 20250102153050.png]]
 **the determinant**
-![[Pasted image 20250102153143.png]]
+![[pics/Pasted image 20250102153143.png]]
 if the det is not zero
 
-![[Pasted image 20250102153405.png]]
+![[pics/Pasted image 20250102153405.png]]
 det(A) ≠ 0 iff graph has perfect matching, 
 however The issue is that a regular biadjacency matrix A (with just 1s and 0s) won't work because:
 1. The determinant could be zero even when a perfect matching exists
@@ -252,7 +252,7 @@ Its biadjacency matrix would be:
 [1 1] The determinant is 0, but the graph clearly has perfect matchings!
 ```
 
-![[Pasted image 20250102155121.png]]
+![[pics/Pasted image 20250102155121.png]]
 **Determinant and perfect matchings** 
 - The determinant of the symbolic matrix is via Leibniz’s formula a sum of signed terms, one for each perfect matching in the graph, given as a product of the variables of the edges in the matching. 
 - The determinant is hence a non-zero multivariate and multilinear polynomial when there are perfect matchings in the graph. 
@@ -291,7 +291,7 @@ Its biadjacency matrix would be:
 - Space complexity: O(n²)
 ### Describe one way of computing a numeric determinant.
 Gaussian elimination
-![[Pasted image 20250103094549.png]]
+![[pics/Pasted image 20250103094549.png]]
 Running time is O(n³) using field operations.
 
 ## Markov chains: 
@@ -320,7 +320,7 @@ The cover time of a graph is the maximum over all start vertices v in V of the e
 
 
 ### Show a tight asymptotic upper bound on the cover time of a random walk on an undirected non-bipartite connected graph. 
-![[Pasted image 20250103143028.png]]
+![[pics/Pasted image 20250103143028.png]]
 ### Show an example of a strongly connected directed graph in which the cover time is exponential. 
 Here's a striking example of how directed graphs can have exponential cover time:
 
@@ -341,11 +341,11 @@ Assume a 2SAT formula with n variables has a satisfying assignment and that the 
 Hence, if we abort after $2n^2$ steps, we see from Markov’s inequality that the probability that we don’t find an assignment when there is one, is at most ½.
 
 **Markovs inequality**
-![[Pasted image 20250104111626.png]]![[Pasted image 20250104111638.png]]
+![[pics/Pasted image 20250104111626.png]]![[pics/Pasted image 20250104111638.png]]
 
 
-![[Pasted image 20250104112747.png]]
-![[Pasted image 20250104115033.png]]
-![[Pasted image 20250104115106.png]]
+![[pics/Pasted image 20250104112747.png]]
+![[pics/Pasted image 20250104115033.png]]
+![[pics/Pasted image 20250104115106.png]]
 
-![[Pasted image 20240924141018.png]]
+![[pics/Pasted image 20240924141018.png]]
