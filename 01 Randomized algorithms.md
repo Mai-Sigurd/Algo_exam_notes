@@ -189,13 +189,21 @@ $P(\text{fail})\leq (e^{\frac{1}{n^{2}}})^{n^2}=e^{\frac{n^{2}}{n^{2}}}=e^{-1}=\
 ### Sketch how you can determine the number $π$ by throwing darts.
 
 ![](pics/vfdvbfsb.png)
-
+This is very close to the example from the lecture. 
+Essentially, imagine circular dart board with it's center being denoted 0,0. Then the dart board is a circle with radius 1, so the east most point is 1,0 and the north most point is 0,1. 
+Imagine a square whose opposite corners are −1,1 and 1,−1. 
+The area of the square is 4 and the area of the circle is $π$. 
+If we throw darts at the square then the probability of hitting the circle is $π/4$, since that is the ratio of the areas. Then if we throw $n$ darts and m of them hit the circle then $\frac{m}{n} ≈ \frac{π}{4}$, ergo $π≈4 \frac{m}{n}$.
 ### What does it mean for a randomised algorithm to $(ε,δ)$-approximate a value?
-
+An algorithm is said to approximate the answer if it produces an estimate that is within a factor of $(1+−ϵ)$ of the true answer with probability at least $1−δ$. This means that the algorithm is allowed to be wrong with probability $δ$ and the answer is allowed to be off by a factor of $ϵ$.
 ### How many samples are sufficient to $(ε,δ)$-approximate the mean $μ$ of an indicator random variable $X$? What is the name of the bound used to prove this? (You don’t need to prove this bound, but have a rough idea how the proof works.)
 
 Chern off bound
+Chern off bound
+This is the Chernoff bound. The Chernoff bound bounds the sum of independent random variables by providing an upper limit on the probability that the sum deviates from its expected value by more than a certain amount.
 
+When dealing with indicator functions, where $X_i$ is $1$ if an event occurs and $0$ otherwise, then let $S$ be the sum $S=X_1+⋯+X_n$ after $n$ samples and $μ=\frac{S}{n}$ be the mean. This must be within $\epsilon$ of the true mean $μ$ with probability at least $1−δ$.
+![](pics/new1.png)
 ### Consider the following algorithm: To determine the number of satisfying assignments for a Boolean formula $F$ with n variables, randomly sample some number T of assignments. Among those sampled assignments, let $S$ be the number of assignments that satisfy $F$. Then output $S/T * 2^n$.
 
 #### Is the expected output of this algorithm correct?
@@ -229,12 +237,22 @@ The algo makes use of:
 $a \cdot b \bmod m = (a \bmod m) \cdot (b \bmod m) \mod m$
 and the fact that you can split exponents up, and delete some of them when you take them to base 2
 ![](pics/csd.png)
+The idea is we can turn ab into: $$ a^b = a^{2^0b_0+2^1b_1+\dots+2^kb_k} = a^{2^0b_0}a^{2^1b_1}\dots a^{2^kb_k} $$
 
+Where $b_i$ is the $i$th bit of b. The algorithm only does the multiplying when the corresponding digit of b is 1, which also skips some computations. Each computation is also done modulo n, since $a*b \mod n=(a \mod n)(b \mod n)\mod n$. The full algorithm goes as follows:
+
+1. Set $c=1$ and $a_{cur}=a$
+2. For $i=0,1,…,k,$ where $k$ is the number of bits in $b$:
+    1. If $b_i=1$ then set $c=c*a_{cur} \mod n$
+    2. Set $a_{cur}=a_{cur}^{2} \mod n$
+3. Return $c$
+
+The running time of the algorithm is $O(\log ⁡b)$, since the number of bits in $b$ is $\log ⁡b$. For each iteration there is at most one multiplication and one squaring operation.
 ### Describe one algorithm that efficiently checks whether an integer is a prime or not w.h.p.(with high probability)
-
+The Miller-Rabin primality test is a probabilistic algorithm that determines whether a given number is prime or not. It is based on the strong probable prime definition. The algorithm works by:
 ==TODO ask chat to explain==
 ![](pics/defw.png)
-
+The algorithm is correct with probability at least $3/4$, and can be made arbitrarily close to $1$ by repeating the process $k$ times. The running time of the algorithm is $O(k \log 3⁡ n)$ for $k$ iterations. This is pretty good as the algorithm usually deals with very large numbers.
 ## Algebraic algorithms:
 
 ### Roughly, what does the DeMillo-Lipton-Schwartz-Zippel lemma say
@@ -422,4 +440,4 @@ Hence, if we abort after $2n^2$ steps, we see from Markov’s inequality that th
 ![](pics/vfvfs.png)
 ![](pics/vfvdf.png)
 
-![](pics/Pasted image 20240924141018.png)
+![](pics/whiteboard_proof_chern.png)
