@@ -1,4 +1,3 @@
-#
 
 ## Basics and Branching
 
@@ -12,11 +11,11 @@ An FPT, fixed parameter tractable, algo that solves a problem in time
 $$F(k) \cdot poly(|I|)$$
 Where f(k) is function only dependent onk
 poly in input size
-FPT algorithms are considered efficient for small values of kkk because the dependence on kkk is separated from the input size, and the running time is polynomial in ∣I∣|I|∣I∣ for a fixed kkk.
+FPT algorithms are considered efficient for small values of k because the dependence on $k$ is separated from the input size, and the running time is polynomial in $|I|$ for a fixed $k$.
 
 ### For which parameter choices does an FPT algorithm run in polynomial time?
 
-An FPT algorithm runs in polynomial time when the parameter kkk is bounded by a constant. In such cases, the function f(k) becomes a constant multiplier, and the overall running time simplifies to, poly(I) which is polynomial.
+An FPT algorithm runs in polynomial time when the parameter k is bounded by a constant. In such cases, the function f(k) becomes a constant multiplier, and the overall running time simplifies to, poly(I) which is polynomial.
 
 ### Describe how to solve the Vertex Cover problem in running time, where k is the$𝑂(2^{𝑘}𝑛)$ solution size.
 

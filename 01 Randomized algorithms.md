@@ -207,10 +207,12 @@ When dealing with indicator functions, where $X_i$ is $1$ if an event occurs a
 ### Consider the following algorithm: To determine the number of satisfying assignments for a Boolean formula $F$ with n variables, randomly sample some number T of assignments. Among those sampled assignments, let $S$ be the number of assignments that satisfy $F$. Then output $S/T * 2^n$.
 
 #### Is the expected output of this algorithm correct?
-
+Yes. $S/T$ represents the fraction of correct assignments in the samples, while 2n is number of assignments in a single correct assignment, as it is the number of possible assignments for n variables. Therefore $S/T∗2^n$ is the expected number of correct assignments.
 #### What other problem is there?
+If the number of satisfying assigments is very small then the algorithm may not find them unless $T$ is very large, which would make it very slow. Formally if the number of assignments is small compared to $2^n$ then the probability of finding it is very small. This will be solved by the next algorithm.
 
 ### Describe the randomized approximation algorithm for counting satisfying assignments to DNFs discussed in class.
+The algorithm works by creating a very small sample space. Imagine a DNF formula, fx: $$ (x_1 \wedge \overline{x_2}\wedge x_3) \vee (x_2\wedge x_4) \vee (\overline{x_1}\wedge x_3\wedge x_4) $$
 
 #### What exactly is the set it samples from?
 
@@ -428,6 +430,15 @@ The expected time to see this sequence is exponential: $2^{(n-1)}$.
 ### Describe how the algorithm for 2SAT can be analyzed as a random walk on a graph. What is the graph and what is its cover time?
 
 ==TODO graph descripton==
+
+**The problem:**
+
+The 2SAT problem is a boolean formula in conjunctive normal from on n variables with 2 literals in each clause, fx: $$ (x_1 \vee \overline{x_3}) \wedge (\overline{x_1} \vee x_2) \wedge (\overline{x_2} \vee x_4)\wedge (\overline{x_3} \vee \overline{x_4}) $$
+
+The problem is to find an assignment to the variables such that the formula is satisfied. The example has satisfying assignment `
+```x1=true,x2=true,x3=false,x4=false.```
+
+
 
 Assume a 2SAT formula with n variables has a satisfying assignment and that the 2SAT random walk algorithm is allowed to run until it finds a satisfying assignment. Then the expected number of steps until the algorithm finds a satisfying assignment is at most $n^2$.
 
