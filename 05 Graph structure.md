@@ -77,17 +77,38 @@ If G is not complete, G has at least three vertices. If G is a 3 vertices line (
 - Let S be a minimal separator that separates x and y
 - let A_x be the connected component of G-s that contains X and let A_y be defined accordingly.
 - ![](pics/oq.png)
-  - Note that $G[A_{x}\cup S]$ is chordal . If $G[A_{x}\cup S]$ is complete, then A*x contain a simplicial vertex which is also a simplicial vertex in G. By induction hypothesis, $G[A*{x}\cup S]$ has two non-adjacent simplicial vertices.
-- note that a vertex that is simplicial in $G[A_{x}\cup S]$ but is contained in S is _not_ necesarily simplicial in G, as this vertex has neighboors in A*y .
+  - Note that $G[A_{x}\cup S]$ is chordal . If $G[A_{x}\cup S]$ is complete, then $A*x$ contain a simplicial vertex which is also a simplicial vertex in G. By induction hypothesis, $G[A*{x}\cup S]$ has two non-adjacent simplicial vertices.
+- note that a vertex that is simplicial in $G[A_{x}\cup S]$ but is contained in S is _not_ necesarily simplicial in G, as this vertex has neighboors in $A*y$.
   However since $G[A*{x}\cup S]$ has two non-adjacent simplicial vertices and by Obs2 S is a clique we know that at least one of the simplical vertices is in Ax, (and not in S) . Hence this vertex is also a simplicial in G. (Note that is has the same set of neighbors in $G[A_{x}\cup S]$ and in $G$
-  With a symetric argument we find a simplicial vertex in A_Y since S is a seperator, there are no edges between Ay and Ax. Hence we have found two-non adjacent simplicial in G as desired
+  With a symetric argument we find a simplicial vertex in $A_Y$ since S is a seperator, there are no edges between Ay and Ax. Hence we have found two-non adjacent simplicial in G as desired
 
 By the main thm we conclude that GRAPH coloruong can be solved in poly time on chordal graphs.
 
 ### Give a polynomial time algorithm to solve the Graph Coloring problem on chordal graphs. Argue for the correctness of the algorithm. What is the running time?
 
-something something PEO?
+**Step 1: Find a Perfect Elimination Order (PEO)**
+	Use a linear-time algorithm
+**Step 2: Greedy Coloring**
+1. Process the vertices in the reverse of the PEO ($v_n, v_{n-1}, \ldots, v_1$)
+2. Assign each vertex the smallest available color not used by its already-colored neighbors.
+#### Correctness of the Algorithm
 
+1. **Chordal Graph Property**:
+    
+    - The PEO ensures that when a vertex $v_i$​ is being colored, its neighbors that have already been processed form a clique.
+    - Thus, the number of colors used is at most $\Delta+1$, where $\Delta$ is the maximum degree of the graph.
+2. **Greedy Coloring Correctness**:
+    
+    - The greedy algorithm ensures that no two adjacent vertices have the same color.
+    - Since the PEO ensures a minimal clique structure, the greedy algorithm produces an optimal coloring for the graph
+#### Running Time
+
+1. **Finding the PEO**:
+    - PEO takes $O(V+E)$, where $V$ is the number of vertices and $E$ is the number of edges.
+2. **Greedy Coloring**:
+    - Each vertex checks the colors of its neighbors, which takes $O(E)$ across all vertices.
+
+**Total Running Time**: $O(V + E)$
 ### What is a clique tree for a chordal graph? Show how to construct a clique tree for a chordal graph in polynomial time.
 
 A clique tree for a chordal graphs shows us the maximal sizes of the cliques, and the denotes for us some seperators.
