@@ -113,12 +113,88 @@ By the main thm we conclude that GRAPH coloruong can be solved in poly time on c
 
 A clique tree for a chordal graphs shows us the maximal sizes of the cliques, and the denotes for us some seperators.
 We can construct these in polynomial time.
-![](pics/pq.png)
 
+PEO
+
+![](pics/pq.png)
+![](pics/clique_tree.png)
 # Solving problems on chordal graphs
 
 ### Describe how to solve the Maximum Independent Set problem on trees. How can you solve it on forests?
+Trees are good for dynamic programming. 
 
+we know that once we have seen a vertex we will not see it again, else there would be a cycle.
+
+**Step 1.** Pick a root
+**Step 2** Define a dp relation
+	- Define $DP(u, 0)$ as the size of the largest independent set in the subtree rooted at $u$, excluding $u$.
+	- Define $DP(u,1)$ as the size of the largest independent set in the subtree rooted at $u$, including $u$
+The recurrence relations are:
+
+$DP(u, 0) = \sum_{v \in \text{children}(u)} \max(DP(v, 0), DP(v, 1))$
+
+$DP(u, 1) = 1 + \sum_{v \in \text{children}(u)} DP(v, 0)$
+
+The result for the root is:
+$\max(DP(\text{root}, 0), DP(\text{root}, 1))$
+
+#### Forests
+A forest is a disjoint union of trees. Solve the DP relation on each tree separately (using the tree algorithm above) and sum the results.
 ### What is a nice clique tree?
+A **nice clique tree** is a structured representation of a chordal graph:
+
+1. Every maximal clique in the graph is represented as a node in the tree.
+2. Each vertex in the graph appears in a connected subset of the tree (the **running intersection property**).
+It is made with the idea of a clique tree, 
+But has distinct rules for nodes
+- Introduce nodes
+- Forget nodes
+- Join nodes
+- Leafs
+
+The number of nodes is still polynomial in $n$
+
 
 ### Describe the Feedback Vertex Set problem. Give a polynomial time algorithm to solve this problem on chordal graphs using a nice clique tree. What is the running time of the algorithm?
+Now for the Feedback Vertex Set problem, which asks us to find a minimum set of vertices whose removal makes the graph acyclic (i.e., turns it into a forest), maximal forest
+
+
+For any bag in the nice clique tree we have that the size of the maximum induced forest it at most 2. 
+
+This is due to the nature of a clique tree as every bag is fully connected, so any subset of a bag larger than 3 would produce a cycle and can therefore not be a tree. 
+To compute the maximum induced forest of $G$, we define a bottom-up DP relation on the nice clique tree of $G$.
+
+First, define $B_t$ as the bag of vertices of tree node $t$, and $S$ as a subset of $B_t$ such that $S \subseteq B_t \leq 2$. We want to use compute all subsets $S$ to look up the DP relation of the children nodes, to compute the intersection of exactly the nodes in $S$.
+
+**Leaf node:**
+The leaf node leaves a pretty simple DP relation as it is always empty. 
+$$
+DP[t,\emptyset] = 0
+$$
+**Introduce node:**
+The introduce needs to handle both what the child node $t'$ contains as well as the introduce node $t$. Let $v$ be the node introduced in the bag $t$. By the definition of the introduction bag, we can only intersect in $t'$ with subsets that do not include $v$. Therefore, when we want to calculate the DP relation with subsets including $v$, we add 1. 
+
+$$\begin{equation*}
+    DP[t, s] = \begin{cases}
+        DP[t', S \setminus \{v\}] + 1   & a \in S \\
+        DP[t', S]                       & a \notin S
+    \end{cases}
+\end{equation*}$$
+
+**Forget node**
+We define $v$ as the vertex forgotten in bag $t$, and denote $t'$ as the child of $t$, which contains $v$. For each subset, check whether we get a better result when we include the forgotten vertex or when we decide to forget it. 
+$$\begin{align*}
+DP[t,S] = \max(DP[t', S], DP[t', S \cup \{v\}])
+\end{align*}$$
+
+
+**Join node:**
+For the join node, we want to combine the results of the two children, but without doubly counting the subset we are looking up. Let $t_1$ and $t_2$ define the children of $t$.
+$$\begin{align*}
+DP[t, S] =& DP[t_1, S] + DP[t_2, S] - |S|\\
+\end{align*}$$
+
+**Runtime**
+Constructing the nice clique tree takes $O(n^2)$ time. 
+There are at most $\sum_{k = 0}^2 \binom{n}{k} \in O(n^2)$ subsets with size at most 2 in a bag of $n$ vertices, since $\binom{n}{2} \in O(n^2)$, and $\binom{n}{1} + \binom{n}{0} = n + 1$.
+Hence, we can use dynamic programming on a nice clique tree in $O(n^2 \cdot n^2) = O(n^4)$ time to solve the *Minimum Feedback Vertex Set* on chordal graphs.
