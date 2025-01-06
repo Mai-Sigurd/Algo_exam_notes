@@ -26,9 +26,29 @@ Importantly, the run-time of an FPTAS is polynomial in the problem size and in 1
 
 Describe the matching-based algorithm for finding a vertex-cover in a graph that is at most twice as large as the minimum vertex-cover. Include the following in your description:
 
+#### Algorithm Outline
+1. Find a **maximal matching** $M$ in the graph $G$.
+2. Include both endpoints of every edge in $M$ in the vertex cover $C$.
+    - That is, for every edge $(u, v) \in M$, add $u$ and $v$ to $C$.
+3. Output $C$ as the vertex cover.
 ### What does the existence of a k-edge matching imply for the minimum size of a vertex-cover?
+for a vertex cover we must necessarily cover all edges. For a matching, we must have that at least one of the vertices of the edge is picked for that edge to be covered. We therefore have a lower bound for the minimum size of the cover, k.
+
+Since we can ensure all edges are covered in our algorithm, the lower bound for a cover is k, and our algorithm picks 2k we have that
+ $\alpha = \frac{APX}{OPT}=\frac{2k}{k}=2$
+ 
 ### How does it matter whether you consider maximum matchings or maximal matchings in the algorithm? Which is the better choice?
+![](pics/maximumVsMaximalMatching.png)
+A maximum matching is the worst we could do as we would get the largest k, 
+A minimal maximal matching will get us the lowest k
 ### Give an infinite family of example graphs on which the algorithm indeed outputs only a 2-approximate solution. Also give a family of example graphs on which the algorithm outputs an optimal solution.
+
+**Star graph**
+in a star graph we have to necessarily pick exactly one matching -, but with two vertices. min vertex cover is one, our output will always be 2
+
+**Bipartite graphs**
+given a bipartite graph, the matching will be the minimal nedeeded vertices for the vertex cover.
+
 # Approximation algorithms
 ## Coloring 3-colorable graphs
 
