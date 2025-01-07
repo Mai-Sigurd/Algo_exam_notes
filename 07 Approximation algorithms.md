@@ -68,14 +68,34 @@ We start with the input graph and repeatedly:
 4. Continue until the graph is empty
 
 ## Metric problems and TSP
+Lecture 26
 
 ### What does it mean that a graph has metric costs/weights?
-
+They uphold the triangle inequality
+![](pics/triangle_inequality.png)
 ### What is the Steiner Tree problem?
-#### How can it be reduced to a version in which the input graph is required to have metric costs?
-#### Give a 2-approximation for Metric Steiner Tree.
+The Steiner tree problem in graphs can be seen as a generalization of two other famous combinatorial optimization problems: the (non-negative) shortest path problem  and the minimum spanning tree problem
 
+Given undirected graph 𝐺 = (𝑉, 𝐸) with edge weights 𝑤: 𝐸 → ℝ+, and a set of required vertices 𝑅 ⊆ V, find a a tree containing all vertices in 𝑅 of minimum total weight. You may use some or all of the non required vertices.
+#### How can it be reduced to a version in which the input graph is required to have metric costs?
+Steiner Tree reduces to Metric Steiner Tree
+Given instance $I=(G,w,R)$ to Steiner tree, we construct an instance $I’=(G’,w’,R’)$ to Metric Steiner tree as follows:
+1. We keep the same vertices in $I’$ as in $I$, but let $G’$ be the complete graph. 
+2. We let $w(u,v)$ be equal to the length of the shortest path from $u$ to $v$ in G. 
+3. We keep the same set of required vertices $R’=R$.
+
+We then find the minimum spanning tree.
+- We can compute the minimum spanning tree on the complete graph containing only the required vertices 𝑅 with weights equal to shortest path between vertices in original graph. Remember that the minimum spanning tree can be computed in polynomial time.
+
+
+#### Give a 2-approximation for Metric Steiner Tree.
+Minimum Spanning Tree is a 2-approximation of Metric Steiner Tree
+![](pics/metric_steiner1.png)
+
+![](pics/metric_steiner2.png)
+![](pics/metric_steiner3.png)
 ### Define the TSP and argue that it is NP-complete.
+
 ### Show that TSP remains NP-complete on metric instances.
 ### How do the general TSP and the metric TSP differ in terms of approximability? Argue that the general TSP cannot be approximated within a constant factor unless P=NP.
 ### Describe how to obtain a 2-approximation for the metric TSP. Highlight where you use the metric property.
