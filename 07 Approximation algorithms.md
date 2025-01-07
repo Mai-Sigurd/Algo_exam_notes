@@ -49,7 +49,6 @@ in a star graph we have to necessarily pick exactly one matching -, but with two
 **Bipartite graphs**
 given a bipartite graph, the matching will be the minimal nedeeded vertices for the vertex cover.
 
-# Approximation algorithms
 ## Coloring 3-colorable graphs
 
 ### Given a 3-colorable n-vertex graph, show how you can in polynomial time find a proper $O(\sqrt{n})$-coloring of the graph
@@ -84,8 +83,24 @@ We start with the input graph and repeatedly:
 
 ## Semidefinite Programming
 
-- [ ] math
-### What is a semidefinite program? How fast can we find a solution to a semidefinite program in n variables?
-###  For a positive semidefinite matrix M, what is the name of the algorithm that computes a triangular matrix L so that LL^T=M? What is its running time?
+### What is a semidefinite program? How fast can we find a solution to a semidefinite program in $n$ variables?
+
+is a program, that takes a given input and computes it as vectors. It finds a plane that follows some min or max of a given function
+
+Surprisingly, if we let the n vectors be unit vectors in n-dimensional Euclidean space, then there is a polynomial time algorithm! This is Goemans and Williamson’s algorithm
+
+###  For a positive semidefinite matrix $M$, what is the name of the algorithm that computes a triangular matrix $L$ so that $LL^T=M$? What is its running time?
+Cholesky factorization
+
+If and only if $M$ is positive semidefinite, there exists a matrix $P$ such that $𝑀 = 𝑃𝑃^𝑇$. Such a $P$ given $M$ can then be found in polynomial time
+
+Using Cholesky decomposition (see Section 26.7), a real symmetric matrix can be decomposed, in polynomial time, as $A=U ΛU T$, where $Λ$ is a diagonal matrix whose diagonal entries are the eigenvalues of $A$. Now $A$ is positive semidefinite iﬀ all the entries of $Λ$ are nonnegative, thus giving a polynomial time test for positive semidefiniteness.
 ### Name two combinatorial problems that can be approximated with the help of semidefinite programming.
+- **Max-Cut Problem**:
+    - SDP provides a 0.878-approximation using the Goemans-Williamson algorithm.
+- **3-Graph Coloring**:
+    - SDP can approximate chromatic numbers or related variants
+    - coloring is also just independent set problem
+    - ![](pics/semi_independentset.png)
 ### How do you get from the vectors obtained from a solution to the semidefinite program to a solution to the combinatorial problem?
+![](pics/analysis_of_semi.png)

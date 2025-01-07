@@ -212,13 +212,30 @@ Yes. $S/T$ represents the fraction of correct assignments in the samples, whil
 If the number of satisfying assigments is very small then the algorithm may not find them unless $T$ is very large, which would make it very slow. Formally if the number of assignments is small compared to $2^n$ then the probability of finding it is very small. This will be solved by the next algorithm.
 
 ### Describe the randomized approximation algorithm for counting satisfying assignments to DNFs discussed in class.
+If we repeatedly guess an assignment from the $2^n$ possible ones, and see how often it satisfies the formula, we will be able to estimate the number of satisfying assignments. 
+
+Note however, that if there are not that many of them, we might need many samples before we encounter just the first one!
+
 The algorithm works by creating a very small sample space. Imagine a DNF formula, fx: $$ (x_1 \wedge \overline{x_2}\wedge x_3) \vee (x_2\wedge x_4) \vee (\overline{x_1}\wedge x_3\wedge x_4) $$
+The algorithm then for each clause $C_i$ in the DNF formula defines the set of assignments that would satisfy it as $SC_i$, the size of this set is $2^{n−l_{i}}$ where $l_{i}$ is the number of literals in the clause
+
+![](pics/clauses_in_bubbles.png)
+
 
 #### What exactly is the set it samples from?
+This can be an absolutely huge set. $t$ is the number of clauses in the DNF formula.
 
 #### Which condition does it check on such a sample?
+Define a sampling space
+$$U=\{ (i,a):1\leq i \leq t \text{  and  } a \in SC_i \}$$
+and note that every assignment that satisfies the formula is represented in $U$. Some assignments are represented many times.
+
+![](pics/clause_estimation.png)
+
+![](pics/samplingOverADenseSpace.png)
 
 #### How does this algorithm solve the problem encountered by the algorithm in the previous bullet point?
+The earlier algorithm had the problem that a satisfying assignment might not be found. The difference here is that the sample space is only satisfying assignments which are then sampled from. ==TODO: snak==
 
 ## Primality testing -
 
