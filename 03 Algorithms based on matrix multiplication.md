@@ -57,6 +57,8 @@ so you divide the trace by 6
 
 A clique of size $k$ is a set of $k$ vertices that are pairwise connected. Detecting or counting such cliques can be extended from the triangle-detection approach.
 
+
+==TODO: below is wrong==
 **Adjacency Matrix Representation**:
 
 - Represent the graph with its adjacency matrix A, where $A[i][j]=1$ if there's an edge between vertices i and j, and 0 otherwise.
