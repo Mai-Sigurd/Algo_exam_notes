@@ -95,12 +95,44 @@ Minimum Spanning Tree is a 2-approximation of Metric Steiner Tree
 ![](pics/metric_steiner2.png)
 ![](pics/metric_steiner3.png)
 ### Define the TSP and argue that it is NP-complete.
+Given a complete undirected graph 𝐺 = (𝑉, 𝐸) with positive edge weights 𝑤: 𝐸 → ℝ+, find a tour visiting all vertices of minimum total weight.
+
+hamiltonian cycle is NP-complete and we can reduce Hamiltonian to TSP by adding the same lengt weights to every edge. The return instance of TSP will be a hamiltonian cycle
+
+
 
 ### Show that TSP remains NP-complete on metric instances.
-### How do the general TSP and the metric TSP differ in terms of approximability? Argue that the general TSP cannot be approximated within a constant factor unless P=NP.
-### Describe how to obtain a 2-approximation for the metric TSP. Highlight where you use the metric property.
-###  Describe how to obtain a (3/2)-approximation for the metric TSP
+Given a complete undirected graph 𝐺 = (𝑉, 𝐸) with positive edge weights 𝑤: 𝐸 → ℝ+, find a tour visiting all vertices of minimum total weight. The weights respect the triangle inequality.
 
+### How do the general TSP and the metric TSP differ in terms of approximability? 
+
+![](pics/metric_tsp_2_approx.png)
+![](pics/metric_tsp_2approx_2.png)
+#### Argue that the general TSP cannot be approximated within a constant factor unless P=NP.
+![](pics/TSP_NOT_APPROX.png)
+**Reason**: Reduction from the Hamiltonian Cycle problem, where any approximate solution gives the exact solution.
+- Suppose you could approximate TSP within a constant factor $c$
+- Any approximate solution would distinguish between:
+    - A valid Hamiltonian Cycle (cost $n$).
+    - A non-Hamiltonian cycle (cost much greater than $c \cdot n$, because of large $M$).
+- This would solve the Hamiltonian Cycle problem exactly, contradicting $P \neq NP$
+### Describe how to obtain a 2-approximation for the metric TSP. Highlight where you use the metric property.
+When relaxing the euler tour we are doing so in triangles., this is how we use the property.
+###  Describe how to obtain a (3/2)-approximation for the metric TSP
+==TODO: video or snak==
+![](pics/metric_TSP_1.5_1.png)
+![](pics/metric_TSP_1.5_2.png)
+![](pics/metric_TSP_1.5_3.png)
+1. Compute an MST of the graph.
+2. Find a **minimum-weight perfect matching** on the odd-degree vertices of the MST.
+3. Combine the MST and the matching to form an Eulerian graph.
+4. Find an **Eulerian circuit**, then convert it into a Hamiltonian cycle by skipping repeated visits.
+
+- **Correctness**: Eulerian graph ensures a tour. Metric property guarantees skipping duplicates doesn’t increase the cost.
+- **Approximation Ratio**:
+    - MST cost $\leq \text{OPT}$
+    - Matching cost $\leq \frac{1}{2} \times \text{OPT}.$
+    - Total cost $\leq \frac{3}{2} \times \text{OPT}$
 ## Semidefinite Programming
 
 ### What is a semidefinite program? How fast can we find a solution to a semidefinite program in $n$ variables?
