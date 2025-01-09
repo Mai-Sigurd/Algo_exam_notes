@@ -17,7 +17,7 @@ FPT algorithms are considered efficient for small values of k because the depend
 
 An FPT algorithm runs in polynomial time when the parameter k is bounded by a constant. In such cases, the function f(k) becomes a constant multiplier, and the overall running time simplifies to, poly(I) which is polynomial.
 
-### Describe how to solve the Vertex Cover problem in running time, where k is the$𝑂(2^{𝑘}𝑛)$ solution size.
+### Describe how to solve the Vertex Cover problem in running time, where $k$ is the $𝑂(2^{𝑘}𝑛)$ solution size.
 
 ### How can you improve the running time of the above algorithm?
 
