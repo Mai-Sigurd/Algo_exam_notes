@@ -213,9 +213,10 @@ contradicting that (Twin(3)) is not applicable.
 
 ## Treewidth
 
-- [ ] check for math
-
 ### Define the treewidth of a graph. Give examples for graph families with small and large treewidth (without proofs). Sketch the tree-decomposition for a grid.
+
+Cliques = large 
+Trees = 1
 
 ### What is a nice tree-decomposition? Why is it useful?
 
@@ -235,16 +236,15 @@ contradicting that (Twin(3)) is not applicable.
 
 ### What does it mean that H is a minor of G? What does the Excluded Grid Minor Theorem say? How is it helpful to the win-win approach?
 
-### What does the Planar Excluded Grid Minor Theorem say? How is it helpful to design subexponential parameterized algorithms on planar graphs? (Recall, in this case subexponential algorithms are those with running time where k is the2𝑂( 𝑘)𝑛𝑂(1) solution size.
+### What does the Planar Excluded Grid Minor Theorem say? 
+#### How is it helpful to design subexponential parameterized algorithms on planar graphs? (Recall, in this case subexponential algorithms are those with running time $2^{O(\sqrt{k})}n^{(1)}$ where k is the solution size.
 
-### How can we solve Vertex Cover and k-Path in time on planar graphs?
+### How can we solve Vertex Cover and k-Path in time $2^{O(\sqrt{k})}$ on planar graphs?
 
 ## Color-coding
-
-- [ ] check for math
 
 ### Describe the “color-coding” algorithm for deciding whether a graph has a path of length k.
 
 Make sure to explain the role of random colorings and walks. What changes if you want to decide the existence of cycles rather than paths?
 
-### How can you determine the existence of a colorful k-path in a vertex-colored graph in time or ? (For the second running time, modify the DP for(𝑘 + 1)! · 𝑛𝑂(1) 2𝑘𝑛𝑂(1) Hamiltonian paths.)
+### How can you determine the existence of a colorful k-path in a vertex-colored graph in time $(k+1)!\cdot n^{O(1)}$ or $2^{k}n^{O(1)}$? (For the second running time, modify the DP for Hamiltonian paths.)
