@@ -214,33 +214,206 @@ contradicting that (Twin(3)) is not applicable.
 ## Treewidth
 
 ### Define the treewidth of a graph. Give examples for graph families with small and large treewidth (without proofs). Sketch the tree-decomposition for a grid.
+The **treewidth** of a graph G measures how close G is to being a tree. Formally:
+- 1. Every vertex of G belongs to at least one bag.
+    2. For every edge (u,v) in G, there exists a bag containing both u and v.
+    3. If a vertex v appears in multiple bags, these bags form a connected subtree in T.
+- The **width** of the decomposition is ⁡$\max(|B_i| - 1)$.
+- The **treewidth** of G is the minimum width among all valid tree-decompositions of G.
 
-Cliques = large 
-Trees = 1
+**Small Treewidth**:
+- Trees = 1
+- Cycles = 2
+
+**Large tree width**
+- Chordal graphs = size of largest clique - 1
+
+#### Gridgraphs
+- Grid graphs of size $n \times n$ $(\text{treewidth} \approx n)$
+- ![|400](pics/IMG_2719.jpeg)
 
 ### What is a nice tree-decomposition? Why is it useful?
+A nice includes 4 differrent kinds of nodes. 
+
+**Leaf**
+$x \in V(T)$ st $x$ is a leaf and $B_{x}= \emptyset$
+**Introduce** 
+$x \in V(T)$ st $x$ has a single child $x'$ and $B_{x}= B_{x}' \cup \{v\}$ for some $v \notin B_{x}'$
+**Forget**
+$x \in V(T)$ st $x$ has a single child $x'$ and $B_{x}= B_{x}' \setminus \{v\}$ for some $v \in B_{x}'$
+**Join**
+$x \in V(T)$ st $x$ has a exactly 2 childen $x_{1}, x_{2}$ and $B_{x_1}=B_{x_2}=B_{x}$
+
+
+If G has a TD of width k, it aslo has a nice TD decomposition of width k
+We can always assume we have a nice TD
+#### From notes
+![](pics/IMG_2722.jpeg)
+#### Usefulness
+It is useful because we can define a dp relation on the nodes specific to their type. 
 
 ### Describe how to solve the Maximum Independent Set problem on graphs of bounded treewidth.
+Input: G, (T,B) is a TD of G (width t)
+Parameter t
+	For $t \in V(T)$, $G_t$ is the graph introduces by vertices of $B_t$ plus  vertices appearing below $B_t$ in $T$
 
+
+**Leaf node:**
+The leaf node leaves a pretty simple DP relation as it is always empty. 
+$$
+DP[t,\emptyset] = 0
+$$
+**Introduce node:**
+$s \subseteq B_t$, suppose a is the vertex introduced  
+
+$$\begin{equation*}
+    DP[t, s] = \begin{cases}
+        DP[t', S \setminus \{a\}] + 1   & a \in S \\
+        DP[t', S]                       & a \notin S
+    \end{cases}
+\end{equation*}$$
+
+**Forget node**
+$h$ is the forgotten vertex
+$$\begin{align*}
+DP[t,S] = \max(DP[t', S], DP[t', S \cup \{h\}])
+\end{align*}$$
+
+
+**Join node:**
+For the join node, we want to combine the results of the two children, but without doubly counting the subset we are looking up. Let $t_1$ and $t_2$ define the children of $t$.
+$$\begin{align*}
+DP[t, S] =& DP[t_1, S] + DP[t_2, S] - |S|\\
+\end{align*}$$
+**Lastly**
+$DP[t,S]$: Size of maximum independent set of $G_t$ that intersects $B_{t}$ in exactly S
+S is an independent set
+
+
+The number of nodes in a tree decomposition is $\text{treewidth} \cdot n$
+t is treewidth
+We have that at most  $2^{t+1}\approx 2^{O(t)}$ subsets per node 
+
+So the run time is $\text{treewidth} \cdot n \cdot 2^{O(t)}$
+
+It is paramtized by t
 #### What running time do you achieve?
 
 #### Describe what information you store and how it is computed at the nodes of the tree-decomposition from previously computed information.
 
 #### How to use this to conclude Vertex Cover is FPT parameterized by treewidth?
+minimum Vertex cover is the Complement of maximum independent set
 
+For vertex cover to have parameter t (width of TD)
+$f(t) \cdot poly(n)$
+
+We have that the run time of is $2^{O(t)} \cdot n$
+so FPT
 ### Describe how to solve the 3-coloring problem on graphs of bounded treewidth.
+==TODO==
 
 ### Describe how to solve the MaxCut problem on graphs of bounded treewidth.
 
-### Describe the idea of a win-win approach to design parameterized algorithms.
+Since $G$ is  graph we know that a tree decomposition of $G$ exists, and we can turn a $TD(G)$ into a nice tree decomposition. Because of the specific bag properties of a nice tree decomposition we can construct a DP relation that acts accordingly to the type of bag. We have that for the Max Cut problem we want to to put every vertex in either partition $A$ or $B$. We have therefore defined our DP relation based on these two sets, and the output of the DP lookup is the number of egdes between the two sets. 
 
+**Leaf node:**
+The leaf node leaves a pretty simple DP relation as it is always empty. 
+$$
+DP[t][\{\emptyset\},\{\emptyset\}] = 0
+$$
+
+**Introduce node:**
+The introduce needs to handle both what the child node $t'$ contains as well as the introduce node $t$. Let $v$ be the node introduced in the bag $t$. By the definition of the introduction bag, we can only intersect in $t'$ with subsets that do not include $v$. Since $v$ necessary have to be in two in either partition $A$ or partition $B$ we are left with two cases. In each cases we want to sum up on how many edges $v$ has the to the partition is does not join.
+
+$$\begin{align*}
+    DP[t][ \{A\},\{B\} \cup \{v\}]  =& DP[t'][\{A\},\{B\}] + size(\forall u  \in \{A\} | uv \in E(G)) \\
+    DP[t][ \{A\} \cup \{v\} ,\{B\} ]  =& DP[t'][\{A\},\{B\}] + size(\forall u  \in \{B\} | uv \in E(G))
+\end{align*}$$
+
+**Forget node:**
+We define $v$ as the vertex forgotten in bag $t$, and denote $t'$ as the child of $t$, which contains $v$. Here we look at whether we get a higher result when $v$ is in partition $A$ or $B$. Given the properties of a nice tree decomposition we know that once we forget $v$ we will not encounter it again, since every edge has to be represented in a bag, we know that once we forget it, we have counted all the relevant edges to v in the partitioning. 
+$$\begin{align*}
+DP[t][ \{A\},\{B\}]  = \max(DP[t'][\{A\}\cup \{v\},\{B\}], \max(DP[t'][\{A\},\{B\}\cup \{v\}]) \\
+\end{align*}
+$$
+
+**Join node:**
+For the join node, we want to combine the results of the two children, but without doubly counting the subset we are looking up. Therefore we remove the the number of edges between the current vertices in  $A$ and $B$.  Let $t_1$ and $t_2$ define the children of $t$.
+$$\begin{align*}
+DP[t][ \{A\},\{B\}] = \\ DP[t_1][ \{A\},\{B\}]  + DP[t_2][ \{A\},\{B\}]  -  size(\text{edges between $A$ and $B$})\\
+\end{align*}$$
+
+**Finding the Max Cut**
+To find the Max Cut of $G$ we calculate the DP relation bottom up and look up the largest number outputted at the root bag. 
+
+**Run time**
+Given that the tree width of the tree decomposition is $t$, we have that we have at most $t+1$ vertices in each bag. For each bag therefore have $2^{t+1}$ possible states, i.e. ways to partition between $A$ and $B$. The amount of bags in the tree decomposition is in $O(n)$. In each bag we have to compute the answer for the possible states, we can compute one state in $O(t^{O(1)})$ as we for each vertices in the bag have to look at the possible edges crossing the partition. Therefore computing all the states in a bag will be in in $O(2^{t+1)} \cdot t^{O(1)})$. Lastly this will be computed for every bag in the tree decomposition resulting in the running time: $O(2^{t+1} \cdot t^{O(1)} \cdot n)$
+
+### Describe the idea of a win-win approach to design parameterized algorithms.
+We are either able to guarentee a yes no instance
+OR we are able to conclude the T width is 'small' ie $TW(G)\leq h(k)$ 
+	we can solve in $F(h(k)) \cdot poly(n)$
+
+if *$tw(G)$ is large* :
+	we argue we somehow know the answer
+Otherwise *$tw(G)$ is small* :
+	use DP paramertized by treewidth for the problem
 ### What does it mean that H is a minor of G? What does the Excluded Grid Minor Theorem say? How is it helpful to the win-win approach?
 
+#### H is a minor of G
+H is a minor of G if H can be obtained from G by
+- deleting vertices
+- deleting edges
+- contracting edges
+
+with minor we can pinpoint what 'H' makes it such that G has a large TW
+
+**Subgraph**
+	edge deleting & vertex deletion
+**Induced subgraph**
+	vertex deletion
+
+#### Excluded grid minor theorem
+there exist some function g(t) such that every graph that has a treewidth $\geq g(t)$ contains a grid of size $t$ as a minor
+
+$g(t) = O(t^{5})$ from first proven
+$g(t) = O(t^{98+c})$ from book
+
+excluded minor thereom is bad for independent set because it does not behave well under edge deletion, dominating set same problem
+
+#### How is helpful for win win
+We saw in class how we can use the grids in cycle packing 
+Q: are there k vertex disjoint cycles in G
+
+We have that cycle packing is FPT by treewidth ie $2^{O(tw)}\cdot poly(n)$
+
+If we have a $t \cdot t$ grid 
+![|500](pics/Pasted%20image%2020250110171752.png)
+
+$t^2/4=k$
+$t=2\sqrt{k}$
+
+$h(k) \in (2\sqrt{k})^{98+c}$
+
+if $tw(G)> h(k)$ 
+	then i find k disjoint cycles  => yes instance
+else $tw(G) \leq h(k)$
+	then i use DP by tree width
+		f(h(k)) * poly(n)
 ### What does the Planar Excluded Grid Minor Theorem say? 
+Planar graphs cannot cross edges
+$g(t)\in O(\frac{9t}{2})$
+
+We now have that if the tree width is $tw(G)\geq h(k) \in \frac{O(9 \cdot 2 \sqrt{k} }{2}) \approx O(9\sqrt{k})$
+	then we have $\sqrt{k}$ grid as a minor and therefore k disjoint cycles 
+otherwise
+	$tw(G) \leq h(k)$
+	DP in $2^{O(\sqrt{k})} \cdot poly(n)$
 #### How is it helpful to design subexponential parameterized algorithms on planar graphs? (Recall, in this case subexponential algorithms are those with running time $2^{O(\sqrt{k})}n^{(1)}$ where k is the solution size.
 
 ### How can we solve Vertex Cover and k-Path in time $2^{O(\sqrt{k})}$ on planar graphs?
 
+==TODO==
 ## Color-coding
 
 ### Describe the “color-coding” algorithm for deciding whether a graph has a path of length k.
