@@ -54,23 +54,23 @@ And twice for going around one way or the other
 so you divide the trace by 6
 
 ### How can the algorithm for triangles be extended to detect cliques of a given size k? How does this compare to the brute-force algorithm?
+to make k divisble by three we can just add two or 1 dummy vertices. 
 
 A clique of size $k$ is a set of $k$ vertices that are pairwise connected. Detecting or counting such cliques can be extended from the triangle-detection approach.
 
+To solve question A, we construct a graph $G'$ where each vertex corresponds to a unique $k/3-clique$  in $G$. A vertex $u,v$ in $G'$ is connected if and only if they do not share a vertex in $G$ and the two cliques are fully connected. Finding a clique of size $K$ is therefore reduced to finding a triangle in $G'$. As a triangle in $G'$ corresponds to three different fully connected $k/3-cliques$ in $G$.
 
-==TODO: below is wrong==
-**Adjacency Matrix Representation**:
+To find all $k/3-cliques$, we first find all subsets of size $k/3$, of which there are $\binom{n}{k/3}$. We can show that $\binom{n}{k/3} \in O(n^{k/3})$, since
+$$\begin{equation*}
+    \binom{n}{k/3} = \frac{n!}{(k/3)!(n - k/3)!} < \frac{n!}{(n - k/3)!} = n \times (n - 1) \times (n - 2)\ \cdots\ (n - (k/3) + 1) < n^{k/3}
+\end{equation*}$$
 
-- Represent the graph with its adjacency matrix A, where $A[i][j]=1$ if there's an edge between vertices i and j, and 0 otherwise.
-  **Matrix Exponentiation**:
-- Compute the matrix$A^{k-1}$ the $(k−1)$th power of the adjacency matrix. The entry $A^{k-1}[i][j]$ represents the number of walks of length $k−1$ from vertex i to vertex j.
-  **Clique Detection**:
-- A k-clique involves k vertices that are all pairwise connected. For a set of vertices $\{v_1, v_2, \ldots, v_k\}$ to form a clique, each pair $(v_i, v_j)$ must have an edge between them.
-- By analyzing the entries of $A^{k-1}$, we can infer the presence of k-cliques. Specifically, if $A^{k-1}[i][j]$ is non-zero, it indicates that there are paths connecting vertex i to vertex j through $k−2$ intermediate vertices, suggesting potential k-cliques.
-  **Verification**: - After identifying candidate sets of vertices from $A^{k-1}$ , verify that all pairs within each set are connected by checking the corresponding entries in the original adjacency matrix A.
 
-![](pics/vfsvs.png)
-_from chat_
+
+Since we know that $G'$ has at most $O(n^{k/3})$ vertices, multiplying a $n^{k/3} \times n^{k/3}$ matrix to find a triangle in $G'$ would take time $O(n^{(k/3)^\omega}) = O(n^{\omega k/3})$.
+
+
+ the brute force is just trying all subsets  $n^k$
 
 ### Can you use the clique algorithm to find/count independent sets
 

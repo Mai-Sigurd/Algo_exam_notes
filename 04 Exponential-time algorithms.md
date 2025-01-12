@@ -2,7 +2,7 @@
 
 ### Explain the statement of the exponential-time hypothesis ETH and the strong exponential-time hypothesis SETH. Consider the following:
 
-The Exponential Time Hypothesis (ETH) states that 3-SAT cannot be solved in subexponential time, specifically that it requires at least $2^{cn}$ time for some constant $c > 0,$ where $n$ is the number of variables, ie $2^{O(n)}$
+The Exponential Time Hypothesis (ETH) states that 3-SAT cannot be solved in subexponential time, specifically that it requires at least $2^{cn}$ time for some constant $c > 0,$ where $n$ is the number of variables, ie $2^{o(cn)}$, small O if n 
 
 SETH stands for the strong exponential time hypothesis and states that there is a constant $k$ such that no algorithm can solve k-SAT on $n$ variables with clauses of width at most $k$ in time $2^{(1−\epsilon)n}.$
 
@@ -11,24 +11,33 @@ Informally this means that the time required to solve k-SAT increases exponenti
 **ETH**:  $\exists S >0$ such that 3-sat requires time $\geq 2^{sn}$
 
 
-**Seth** : $\forall s >0,$ $\exists k$ s.t k-sat requires $2^{(1-s)n}$ time
+**Seth** : $\forall s >0,$ $\exists k$ s.t k-sat requires $2^{(1-s)n}$ time, k>2
 
 
 #### Why do they imply $P \neq NP$?
 ETH implies $P \neq NP$ because if $P = NP$, all NP problems, including 3-SAT, would be solvable in polynomial time, contradicting ETH.
 #### Is an algorithm with running time $O(1.0001^{n})$ for 3-SAT possible under ETH? 
-==TODO, fatter hat af runtime==
+No, it is not, 
+It grows slower than $2^{o(n)})$
 
 
 #### Is an algorithm with running time $O(1001^{{n}/{\log n}})$ for 3-SAT possible under ETH?
+mathrule $(a^m)^{n}=a^{mn}$
+No. We can simplify this to: $$ 1001^{n/\log n} = 2^{\log_2(1001) \cdot (n/\log(n))} = 2^{O(n/\log(n))} $$
+This is subexponential time since $O(n/log⁡(n))=o(n)$ and thus $2^{O(n/log⁡(n)}=2^{o(n)}$. ETH rules out subexponential time algorithms for 3-SAT, so this is not possible.
 #### Are either of these algorithms possible under SETH?
+
+Since seth is stronger then these runtimes are not allowed 
+
 #### Briefly give two examples for concrete super-polynomial running times for 3-SAT that are ruled out under ETH.
 1. $O(2^{n/100})$ this is super-polynomial but sub-exponential time complexity.
 2. $O(1.999^n)$ this is super-polynomial but sub-exponential time complexity.
 ### What is the sparsification lemma, and why is it useful?
 The sparsification lemma states that any CNF formula $\phi$ with $n$ variables and $m$ clauses can be written as a disjunction of $O(2^{\epsilon n})$ CNF formulas, each with $O(n / \epsilon)$ clauses, for any $\epsilon > 0$
 
-==TODO==
+In simpler terms, the lemma allows us to "sparsify" a dense kk-SAT formula into a collection of smaller, sparse formulas without significantly increasing the overall complexity of the problem.
+
+This should all take $2^{\epsilon n} \cdot \text{poly}(n)$ time.
 ### Describe the Orthogonal Vectors problem.
 Given two sets L and R of n size vectors from $\{0,1\}^d$ with $d=poly \log(n$), the problem is to determine if there is a pair of vectors $u∈L$ and $v∈R$ such that $u⋅v=0$. This generally takes $O(n^2)$ time to chech
 ![](pics/TheOrthogonalVectors.png)
@@ -42,13 +51,15 @@ We can then reduce the problem to diameter. Diameter in a connected undirected g
 
 #### Is an $O(n^{2}/\log n)$ algorithm or an $O(n^{2} / \sqrt{n})$ time algorithm possible under SETH?
 
-**$O(n^2/logn)$**
+**$O(n^2/log_{2}n)$**
 
-Yes. The factor of log⁡n grows much slower than the polynomial factor of n2, so dividing by it does not significantly reduce the time complexity, and it therefore remains in the bounds of SETH.
+no, since n^2 is smaller than seth
 
 **$O(n^2/n^{1/2})$**
 
-On the other hand, the square root factor actually reduces this problem to $n^{3/2}$ which is subquadratic time complexity. This would contradict that the OV problem cannot be solved significantly faster than $O(n^2)$ under SETH.
+
+
+no since no are polynomials run times 
 ### Describe the k-Dominating Set problem. 
 A dominating set in an undirected graph is a subset of the vertices such that every vertex is either connected to a vertex in S or is in S itself. A k-dominating set, is a dominating set of size exactly k.
 ![](pics/dominatingSet.png)

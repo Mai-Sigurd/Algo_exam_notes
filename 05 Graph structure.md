@@ -12,8 +12,7 @@ As we can see in example of C4. Drawing
 
 Well in particicluar, this is shown by the cycle constraint. If we have a a C4. We cannot order them linearly, as we would like to when we have a interval graph. This introduces thee needs for chords, thus making it a chordal graph.
 
-- [ ] ==TODO: Would be good with drawing==
-
+lets for contradiction assume C4 is an interval graph, and make a schedule, this shows we need the chord
 ### Show that a graph is chordal if and only if it has a perfect elimination ordering.
 
 A perfect elimnation ordering is an ordering of the interval or chordal graph that,

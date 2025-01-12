@@ -148,8 +148,8 @@ If the parameterized problem has a kernel, then we have successfully shrunk the 
 $|I'|=f(k)$
 
 We should very well we able to keep in the runtime of ftp ($f(k)\cdot poly(n)$)
-proof lmao aint the best
-==TODO, not sure about this==:
+
+
 
 > [!!] But you can have a FPT algorithm without an polynmial kernel
 
@@ -209,7 +209,7 @@ $|V | > 2^k$ , and G has an edge clique cover C of size at most $k$.
 Since $2^C$ (the set of all subsets of C) has size at most $2^k$ , and every vertex belongs to at least one clique in $C$ by (Isolated(1)), we have that there exists two vertices $u, v ∈ V$ such that $\{S ∈ C : u ∈ S\} = \{S ∈ C : v ∈ S\}$. 
 But then
 ![](pics/contradict_for_twin.png|200)
-contradicting that (Twin(3)) is not applicable.
+contradicting that (Twin(3)) is not applicable.z
 
 ## Treewidth
 
@@ -310,8 +310,27 @@ $f(t) \cdot poly(n)$
 We have that the run time of is $2^{O(t)} \cdot n$
 so FPT
 ### Describe how to solve the 3-coloring problem on graphs of bounded treewidth.
-==TODO==
+The 3-coloring problem asks whether the vertices of a graph can be colored using at most 3 colors such that no two adjacent vertices share the same color
 
+First, assume that we have the tree decomposition, and a nice tree decomposition at that. Call the decomposition $T$, a node in the tree $t$ and it's bag $X_t$.. Then store the table $dp[t][c]$ where $c$ is a 3-coloring of $X_t$. $dp[t][c]$ is true if the subgraph induced by $X_t$ can be 3-colored with the coloring $c$, otherwise it's false.
+
+  
+
+- Leaf node: $dp[t][\emptyset]=\text{True}$, an empty graph can always be 3-colored.
+
+- Introduce node: Let $v$ be the introduced vertex. Then for each coloring $c'$ of the child bag, loop through $\{1,2,3\}$ called $c$. Check if assigning the color $c$ to $v$ is valid in $c'$, if valid then set $dp[t][c' \cup \{v\rightarrow c\}]=true$, otherwise false.
+
+- Forget node: Let $v$ be the removed vertex. Then for each coloring $c'$ of the child bag, if $dp[t'][c'\setminus \{v\}]$ is true then set $dp[t][c']=true$, otherwise false.
+
+- Join node: Let $t_1$ and $t_2$ be the respective subtrees rooted in $t$. Then for each coloring $c$ of the child bags, if $dp[t_1][c]$ and $dp[t_2][c]$ are true then set $dp[t][c]=true$, otherwise false.
+
+  
+
+The answer is then $\text{True}$ if there exists a coloring $c$ of the root node such that $dp[r][c]=true$.
+
+**Running Time:**
+
+Each bag has at most $k+1$ vertices, with each vertex having 3 possible colors. Therefore each bag has at most $3^{k+1}$ colorings, there are $O(k|V(G)|)$ nodes in the tree decomposition. The running time is then $O(3^{k+1}\cdot k\cdot |V(G)|)$.
 ### Describe how to solve the MaxCut problem on graphs of bounded treewidth.
 
 Since $G$ is  graph we know that a tree decomposition of $G$ exists, and we can turn a $TD(G)$ into a nice tree decomposition. Because of the specific bag properties of a nice tree decomposition we can construct a DP relation that acts accordingly to the type of bag. We have that for the Max Cut problem we want to to put every vertex in either partition $A$ or $B$. We have therefore defined our DP relation based on these two sets, and the output of the DP lookup is the number of egdes between the two sets. 
@@ -413,11 +432,17 @@ otherwise
 
 ### How can we solve Vertex Cover and k-Path in time $2^{O(\sqrt{k})}$ on planar graphs?
 
-==TODO==
+**Vertex Cover:**
+First compute the treewidth of the graph $G$. If the treewidth is at most $9k/2$ then compute a tree decomposition of width $O(k)$ and use dynamic programming to solve the problem. The running time is $2^{O(\sqrt{k})}$.
+
+On the other hand if the treewidth is larger than $9k/2$ then the graph contains a $\boxplus_k$ minor. Since $\boxplus_k$ requires a vertex cover of size at least $k$, then it depends on the input parameter whether the answer is yes or no. Let the param be $k'$, then the answer is no if $k'>k$ and yes if $k'\leq k$. The running time is $O(n^2)$.
+
+Same case with **k-path**.
 ## Color-coding
 
 ### Describe the “color-coding” algorithm for deciding whether a graph has a path of length k.
+*Make sure to explain the role of random colorings and walks. What changes if you want to decide the existence of cycles rather than paths?*
 
-Make sure to explain the role of random colorings and walks. What changes if you want to decide the existence of cycles rather than paths?
 
 ### How can you determine the existence of a colorful k-path in a vertex-colored graph in time $(k+1)!\cdot n^{O(1)}$ or $2^{k}n^{O(1)}$? (For the second running time, modify the DP for Hamiltonian paths.)
+==todo COLOR CODING==

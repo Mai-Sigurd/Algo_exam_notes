@@ -17,8 +17,6 @@ Identity testing is the problem of determining whether a given multivariate [po
 
 A polynomial is zero if and only if all its coefficients are zero. Testing whether $p(x) = 0$ for all $x$ reduces to verifying if p evaluates to zero for sufficiently many points. If p evaluates to nonzero at any point, it is not identically zero.
 
-==TODO:snak med albert==
-
 ### Assume black-box access to a polynomial $p$ of degree at most $n$:
 
 You can choose a query point $s$ and get back $p(s)$ as the result of your query.
@@ -269,7 +267,7 @@ Where $b_i$ is the $i$th bit of b. The algorithm only does the multiplying wh
 The running time of the algorithm is $O(\log ⁡b)$, since the number of bits in $b$ is $\log ⁡b$. For each iteration there is at most one multiplication and one squaring operation.
 ### Describe one algorithm that efficiently checks whether an integer is a prime or not w.h.p.(with high probability)
 The Miller-Rabin primality test is a probabilistic algorithm that determines whether a given number is prime or not. It is based on the strong probable prime definition. The algorithm works by:
-==TODO ask chat to explain==
+==TODO snak==
 ![](pics/defw.png)
 The algorithm is correct with probability at least $3/4$, and can be made arbitrarily close to $1$ by repeating the process $k$ times. The running time of the algorithm is $O(k \log 3⁡ n)$ for $k$ iterations. This is pretty good as the algorithm usually deals with very large numbers.
 ## Algebraic algorithms:
@@ -442,7 +440,6 @@ Consider a directed graph with n vertices arranged in a line:
 
 In this graph, reaching vertex n requires taking all forward edges in sequence, which happens with probability $(1/2)^{(n-1)}$. ie the probability of succes with in one go
 The expected time to see this sequence is exponential: $2^{(n-1)}$.  
-==TODO math ?==
 
 ### Describe how the algorithm for 2SAT can be analyzed as a random walk on a graph. What is the graph and what is its cover time?
 
