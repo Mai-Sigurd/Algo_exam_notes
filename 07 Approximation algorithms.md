@@ -51,21 +51,23 @@ given a bipartite graph, the matching will be the minimal nedeeded vertices for 
 
 ## Coloring 3-colorable graphs
 
+
 ### Given a 3-colorable n-vertex graph, show how you can in polynomial time find a proper $O(\sqrt{n})$-coloring of the graph
+As input we get an $n$-vertex graph $G$ that we are promised to admit a proper 3-coloring. We want to find a proper $k$-coloring of $G$ in polynomial time in $n$ with as small a $k$ as possible
+
+We know that since the graph is 3-colorable, every vertex neighborhood must be bipartite. We can color a bipartite graph fast by:
+
+1. Pick a vertex with more than $\sqrt{n}$ uncolored neighbors.
+2. Color all of them with 3 new colors
+3. Repeat until there are no such vertices left
+4. Greadily color the remaining vertices using $\sqrt{n}$ colors.
+
+This all uses $O(\sqrt{n})$ colors.
 ![](pics/Pasted%20image%2020250105185159.png)
 We know the graph can be colored with 3 colors, 
 
-The key insight comes from looking at independent sets in the graph. 
-n a 3-colorable graph, at least one color class must contain at least $n/3$ vertices. This gives us our strategy: repeatedly find large independent sets and color them with new colors.
+![](pics/Pasted%20image%2020250112153439.png)
 
-Here's how the algorithm works:
-
-We start with the input graph and repeatedly:
-
-1. Find a large independent set (of size at least Ω(√n))
-2. Color all vertices in this set with a new color
-3. Remove these vertices from the graph
-4. Continue until the graph is empty
 
 ## Metric problems and TSP
 Lecture 26
@@ -97,18 +99,13 @@ Minimum Spanning Tree is a 2-approximation of Metric Steiner Tree
 ### Define the TSP and argue that it is NP-complete.
 Given a complete undirected graph 𝐺 = (𝑉, 𝐸) with positive edge weights 𝑤: 𝐸 → ℝ+, find a tour visiting all vertices of minimum total weight.
 
-hamiltonian cycle is NP-complete and we can reduce Hamiltonian to TSP by adding the same lengt weights to every edge. The return instance of TSP will be a hamiltonian cycle
+hamiltonian cycle is NP-complete and we can reduce Hamiltonian to TSP by adding the same length weights to every edge. The return instance of TSP will be a hamiltonian cycle
 
-
+![](pics/TSP_NOT_APPROX.png)
 
 ### Show that TSP remains NP-complete on metric instances.
 Given a complete undirected graph 𝐺 = (𝑉, 𝐸) with positive edge weights 𝑤: 𝐸 → ℝ+, find a tour visiting all vertices of minimum total weight. The weights respect the triangle inequality.
 
-### How do the general TSP and the metric TSP differ in terms of approximability? 
-
-![](pics/metric_tsp_2_approx.png)
-![](pics/metric_tsp_2approx_2.png)
-#### Argue that the general TSP cannot be approximated within a constant factor unless P=NP.
 ![](pics/TSP_NOT_APPROX.png)
 **Reason**: Reduction from the Hamiltonian Cycle problem, where any approximate solution gives the exact solution.
 - Suppose you could approximate TSP within a constant factor $c$
@@ -116,10 +113,16 @@ Given a complete undirected graph 𝐺 = (𝑉, 𝐸) with positive edge weights
     - A valid Hamiltonian Cycle (cost $n$).
     - A non-Hamiltonian cycle (cost much greater than $c \cdot n$, because of large $M$).
 - This would solve the Hamiltonian Cycle problem exactly, contradicting $P \neq NP$
+
+### How do the general TSP and the metric TSP differ in terms of approximability? 
+
+![](pics/metric_tsp_2_approx.png)
+![](pics/metric_tsp_2approx_2.png)
+#### Argue that the general TSP cannot be approximated within a constant factor unless P=NP.
 ### Describe how to obtain a 2-approximation for the metric TSP. Highlight where you use the metric property.
 When relaxing the euler tour we are doing so in triangles., this is how we use the property.
 ###  Describe how to obtain a (3/2)-approximation for the metric TSP
-==TODO: video or snak==
+
 ![](pics/metric_TSP_1.5_1.png)
 ![](pics/metric_TSP_1.5_2.png)
 ![](pics/metric_TSP_1.5_3.png)

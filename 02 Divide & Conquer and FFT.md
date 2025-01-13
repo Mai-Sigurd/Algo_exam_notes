@@ -42,7 +42,7 @@ The trick is to get to down to **three** recursive calls, as if we do four, it w
 ![](pics/lsl.png)
 
 ![](pics/IMG_2701.jpeg)
-
+theres a plus after $2^n$  
 ### What is its running time?
 
 From master thm

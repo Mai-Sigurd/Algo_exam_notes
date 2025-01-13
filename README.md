@@ -5,7 +5,6 @@
 # [04 Exponential-time algorithms](04%20Exponential-time%20algorithms.md)
 
 # [05 Graph structure](05%20Graph%20structure.md)
-- [ ] ==Would be good with drawing==
 # [06 Parameterized algorithms](06%20Parameterized%20algorithms.md)
 
 # [07 Approximation algorithms](07%20Approximation%20algorithms.md)

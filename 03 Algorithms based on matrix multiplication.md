@@ -74,13 +74,8 @@ Since we know that $G'$ has at most $O(n^{k/3})$ vertices, multiplying a $n^{k/3
 
 ### Can you use the clique algorithm to find/count independent sets
 
-The independent set is the opposite problem of the clique.
-**Key Insight**
-An independent set in a graph is a set of vertices with no edges between them. A clique in the complement graph (where edges exist between non-adjacent vertices of the original graph) corresponds to an independent set in the original graph.
+An independent set is a set of vertices where no two vertices are connected by an edge. This is the exact opposite of a clique. So if we define the graph $G'$ as the complement of $G$ where, if 2 vertices are adjacent in $G$ then they aren't in $G'$. Then we can find the independent sets of $G$ by finding the cliques of $G'$.
 
-Find the complement graph $\overline{A} = J - I - A$ *dont know about this its from the chat*where J is the all-ones matrix and I is the identity matrix.
+The algorithm would entail computing $G'$, then finding the cliques of size $k$ in $G'$ and then returning the number of cliques. This would return the number of independent sets of size $k$ in $G$.
 
-**Flip the matrix**
-
-- Use the clique-detection algorithm on $\overline{A}$ to find cliques of size k in the complement graph.
-- Each clique of size k in the complement graph corresponds to an independent set of size k in the original graph.
+It must also be noted that since we compute the complement of $G$ then if $G$ is sparse $G'$ is dense, which could complicate the algorithms running time.

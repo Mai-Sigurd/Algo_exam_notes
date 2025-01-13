@@ -110,7 +110,6 @@ We can simplify the description of the algorithm to:
 4. Continue this alternating inclusion-exclusion process until all cases are accounted for
 We can say that $X$ is the number of vertices that are not excluded in the walk.
 #### Briefly compare this approach to the Bellman-Held-Karp dynamic programming algorithm for Hamiltonian cycles. Also outline the DP algorithm.
-==TODO understand==
 The Bellman-Held-Karp dynamic programming algorithm is an algorithm for computing the Hamiltonian cycle in a graph. It works as follows:
 
 - For each subset $S$ of vertices and a vertex $v∈S$, let d$p[S][v]$ represent the number of paths that start at a fixed vertex, visit all vertices in $S$ exactly once and end at $v$.
@@ -144,13 +143,15 @@ The vanilla inclusion–exclusion method
 We get a $2^{n}poly (n)$ time and polynomial space algorithm for counting the perfect matchings in a general 𝑛-vertex graph
 ##### But we can do better
 Number of edges in induces subgraphs
-==TODO yikes==
+
 ![](pics/perfMatchSuggrah_1.png)
 ![](pics/perfMatchSuggrah_2.png)
 ![](pics/perfMatchSuggrah_3.png)
 ![](pics/perfMatchSuggrah_4.png)
+![](pics/Pasted%20image%2020250112140959.png)
+
 #### How can you speed this up on bipartite graphs, and what are the structures counted there?
-![](pics/permanent_of_square_matrix.png)
+S
 The permanent of a 0/1 square matrix is the number of perfect matchings in a bipartite graph. The permanent can by Ryser's algorithm be computes as: $$ per(A)=\sum_{X\subseteq[n]}(-1)^{n-|X|}\prod_{i=1}^n\left(\sum_{j\in X}A_{ij}\right) $$
 
 The permanent differs from the determinant by not accounting for the sign of the permutation.

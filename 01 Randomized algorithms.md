@@ -205,7 +205,7 @@ When dealing with indicator functions, where $X_i$ is $1$ if an event occurs a
 ### Consider the following algorithm: To determine the number of satisfying assignments for a Boolean formula $F$ with n variables, randomly sample some number T of assignments. Among those sampled assignments, let $S$ be the number of assignments that satisfy $F$. Then output $S/T * 2^n$.
 
 #### Is the expected output of this algorithm correct?
-Yes. $S/T$ represents the fraction of correct assignments in the samples, while 2n is number of assignments in a single correct assignment, as it is the number of possible assignments for n variables. Therefore $S/T∗2^n$ is the expected number of correct assignments.
+Yes. $S/T$ represents the fraction of correct assignments in the samples, while $2^n$ is number of assignments in a single correct assignment, as it is the number of possible assignments for n variables. Therefore $S/T∗2^n$ is the expected number of correct assignments.
 #### What other problem is there?
 If the number of satisfying assigments is very small then the algorithm may not find them unless $T$ is very large, which would make it very slow. Formally if the number of assignments is small compared to $2^n$ then the probability of finding it is very small. This will be solved by the next algorithm.
 
@@ -222,8 +222,6 @@ The algorithm then for each clause $C_i$ in the DNF formula defines the set of
 
 #### What exactly is the set it samples from?
 This can be an absolutely huge set. $t$ is the number of clauses in the DNF formula.
-
-#### Which condition does it check on such a sample?
 Define a sampling space
 $$U=\{ (i,a):1\leq i \leq t \text{  and  } a \in SC_i \}$$
 and note that every assignment that satisfies the formula is represented in $U$. Some assignments are represented many times.
@@ -231,9 +229,12 @@ and note that every assignment that satisfies the formula is represented in $U$.
 ![](pics/clause_estimation.png)
 
 ![](pics/samplingOverADenseSpace.png)
+#### Which condition does it check on such a sample?
+
+Its important to check that the sample chosen, which satifies maybe SC_1 does not satisfy SC_2 as else we will be overcounting. 
 
 #### How does this algorithm solve the problem encountered by the algorithm in the previous bullet point?
-The earlier algorithm had the problem that a satisfying assignment might not be found. The difference here is that the sample space is only satisfying assignments which are then sampled from. ==TODO: snak==
+The earlier algorithm had the problem that a satisfying assignment might not be found. The difference here is that the sample space is only satisfying assignments which are then sampled from. 
 
 ## Primality testing -
 
@@ -267,7 +268,6 @@ Where $b_i$ is the $i$th bit of b. The algorithm only does the multiplying wh
 The running time of the algorithm is $O(\log ⁡b)$, since the number of bits in $b$ is $\log ⁡b$. For each iteration there is at most one multiplication and one squaring operation.
 ### Describe one algorithm that efficiently checks whether an integer is a prime or not w.h.p.(with high probability)
 The Miller-Rabin primality test is a probabilistic algorithm that determines whether a given number is prime or not. It is based on the strong probable prime definition. The algorithm works by:
-==TODO snak==
 ![](pics/defw.png)
 The algorithm is correct with probability at least $3/4$, and can be made arbitrarily close to $1$ by repeating the process $k$ times. The running time of the algorithm is $O(k \log 3⁡ n)$ for $k$ iterations. This is pretty good as the algorithm usually deals with very large numbers.
 ## Algebraic algorithms:
@@ -443,7 +443,7 @@ The expected time to see this sequence is exponential: $2^{(n-1)}$.
 
 ### Describe how the algorithm for 2SAT can be analyzed as a random walk on a graph. What is the graph and what is its cover time?
 
-==TODO graph descripton==
+
 
 **The problem:**
 
@@ -453,8 +453,13 @@ The problem is to find an assignment to the variables such that the formula is s
 ```x1=true,x2=true,x3=false,x4=false.```
 
 
+**The idea:**
+Imagine a satisfying assinment, call it $T$. Then the idea of the algorithm is to pick some assignment called $S$ and make progress towards $T$ by looking at clauses not currently satisfied by $S$.
 
-Assume a 2SAT formula with n variables has a satisfying assignment and that the 2SAT random walk algorithm is allowed to run until it finds a satisfying assignment. Then the expected number of steps until the algorithm finds a satisfying assignment is at most $n^2$.
+Since we pick an unsatisfied clause, then we know that we must set at least one of the literals and change it. So if we randomly select one and change its value in $S$ then we have a new assignment $S'$ which with probability $1/2$ comes one variable closer to $T$.
+
+
+Assume a 2SAT formula with $n$ variables has a satisfying assignment and that the 2SAT random walk algorithm is allowed to run until it finds a satisfying assignment. Then the expected number of steps until the algorithm finds a satisfying assignment is at most $n^2$.
 
 Hence, if we abort after $2n^2$ steps, we see from Markov’s inequality that the probability that we don’t find an assignment when there is one, is at most ½.
 

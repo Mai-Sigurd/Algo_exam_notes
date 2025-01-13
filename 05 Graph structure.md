@@ -35,7 +35,7 @@ Inteval graphs have a PEO, but some non interval graphs also have a peo.
 
 **Observation 1** : With the peo defined we can make the observation that, the cycle graph $CI$ for i larger than 4, does not a peo, because CI does not have any simplicial vertcies
 **Observation2**: If a graph has Ci as an induced subgraph, then it does not have a peo.
-proof with Íwith drawing
+proof with with drawing
 ![](pics/2.png)
 
 ####

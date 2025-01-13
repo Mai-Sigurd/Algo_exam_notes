@@ -442,7 +442,36 @@ Same case with **k-path**.
 
 ### Describe the “color-coding” algorithm for deciding whether a graph has a path of length k.
 *Make sure to explain the role of random colorings and walks. What changes if you want to decide the existence of cycles rather than paths?*
+Color coding: randomly color vertices from a palette of k colours
+The color-coding algorithm is a randomized approach that works as follows:
+
+1. Random Coloring Phase:
+    - Randomly assign each vertex in the graph one of $k$ colors
+    - Each color is chosen independently and uniformly at random
+    - This creates a vertex-colored graph
+2. Dynamic Programming Phase:
+    - Search for a "colorful" path - a path where each vertex has a distinct color
+    - Use dynamic programming to find such a path efficiently:
+      - For each vertex $v$ and each subset $S$ of colors
+      - Compute whether there exists a path ending at $v$ that uses exactly the colors in $S$
+      - Build up from smaller color sets to larger ones
+      - Can find a colorful path in $O(2^k * n)$ time if it exists
 
 
+Since each vertex needs a different color, then if a $k$-length path exists, the probability that our random coloring makes it colorful is $k!/k^k$. By repeating the random coloring $e^k$ times, we get a high probability of success.
+
+**For cycles instead of paths:**
+- The main modification is in the dynamic programming phase
+- Need to keep track of both:
+  - The starting vertex of the potential cycle
+  - The current vertex we're at
+- When completing a potential cycle, check if we can return to the starting vertex
+- Still look for colorful sequences, but now need to return to the start
+- The probability analysis remains similar since we're still looking for k distinct colors
+
+The beauty of this algorithm is that it converts the problem of finding a specific substructure (k-length path) into finding a colorful path in a randomly colored graph, which turns out to be easier to solve using dynamic programming.
+
+The algorithm runs in $2^{O(k)} * n^{O(1)}$ time and succeeds with high probability, making it an FPT (Fixed-Parameter Tractable) algorithm with parameter k.
 ### How can you determine the existence of a colorful k-path in a vertex-colored graph in time $(k+1)!\cdot n^{O(1)}$ or $2^{k}n^{O(1)}$? (For the second running time, modify the DP for Hamiltonian paths.)
-==todo COLOR CODING==
+
+i truly dont know andreas
